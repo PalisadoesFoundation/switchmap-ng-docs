@@ -16,7 +16,6 @@ const config: Config = {
   organizationName: "PalisadoesFoundation", // GitHub org
   projectName: "switchmap-ng-docs", // repo name
 
-  
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
