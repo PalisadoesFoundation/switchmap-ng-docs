@@ -1,4 +1,4 @@
-# Switchmap-NG Developer Documentation
+# Switchmap-NG Documentation
 
 💬 Join the community on Slack from our [Palisadoes Foundation GitHub Home Page](https://github.com/PalisadoesFoundation)
 
