@@ -7,7 +7,7 @@ on:
 
 jobs:
   Deploy-Docusaurus:
-    name: Deploy https://docs.talawa.io website
+    name: Deploy https://docs.switchmap-ng.io website
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     environment:
@@ -18,7 +18,7 @@ jobs:
       # menu. The branch "name" must match the branch in the 
       # "on.push.branches" section at the top of this file
       name: develop
-      url: https://docs.talawa.io
+      url: https://docs.switchmap-ng.io
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
