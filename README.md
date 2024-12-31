@@ -24,4 +24,3 @@ This repo hosts the documentation you see on the https://developer.palisadoes.or
 ## Documentation
 
 - Want to contribute? Look at [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
-
