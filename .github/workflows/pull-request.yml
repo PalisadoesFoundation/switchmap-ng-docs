@@ -1,0 +1,129 @@
+##############################################################################
+##############################################################################
+#
+# NOTE!
+#
+# Please read the README.md file in this directory that defines what should 
+# be placed in this file
+#
+##############################################################################
+##############################################################################
+
+name: Checking workflow files
+on:
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  Code-Quality-Checks:
+    name: Performs linting, formatting, type-checking, checking for different source and target branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the source and target branches are different
+        if: ${{ github.event.pull_request.base.ref == github.event.pull_request.head.ref }}
+        run: |
+          echo "Source Branch ${{ github.event.pull_request.head.ref }}"
+          echo "Target Branch ${{ github.event.pull_request.base.ref }}"
+          echo "Error: Source and Target Branches are the same. Please ensure they are different."
+          echo "Error: Close this PR and try again."                    
+          exit 1
+
+  Check-Sensitive-Files:
+    if: ${{ github.actor != 'dependabot[bot]' && !contains(github.event.pull_request.labels.*.name, 'ignore-sensitive-files-pr') }}
+    name: Checks if sensitive files have been changed without authorization
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Get Changed Unauthorized files
+        id: changed-unauth-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            .github/**
+            CNAME
+            static/CNAME
+            package.json
+            sidebar*.js
+            docusaurus.config.js
+            babel.config.js
+            CODEOWNERS
+            LICENSE 
+            ./*md
+            package-lock.json
+            tsconfig.json
+            yarn.lock
+            static/.nojekyll
+            tsconfig.json
+            .gitignore
+            babel.config.js
+            
+      - name: List all changed unauthorized files
+        if: steps.changed-unauth-files.outputs.any_changed == 'true' || steps.changed-unauth-files.outputs.any_deleted == 'true'
+        env: 
+          CHANGED_UNAUTH_FILES: ${{ steps.changed-unauth-files.outputs.all_changed_files }}
+        run: |
+          for file in ${CHANGED_UNAUTH_FILES}; do
+            echo "$file is unauthorized to change/delete"
+          done
+          echo "To override this, apply the 'ignore-sensitive-files-pr' label"          
+          exit 1
+
+  Count-Changed-Files:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    name: Checks if number of files changed is acceptable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+
+      - name: Echo number of changed files
+        env: 
+          CHANGED_FILES_COUNT: ${{ steps.changed-files.outputs.all_changed_files_count }}
+        run: |
+          echo "Number of files changed: $CHANGED_FILES_COUNT"
+
+      - name: Check if the number of changed files is less than 100
+        if: steps.changed-files.outputs.all_changed_files_count > 100
+        env: 
+          CHANGED_FILES_COUNT: ${{ steps.changed-files.outputs.all_changed_files_count }}
+        run: |
+          echo "Error: Too many files (greater than 100) changed in the pull request."
+          echo "Possible issues:"
+          echo "- Contributor may be merging into an incorrect branch."
+          echo "- Source branch may be incorrect please use develop as source branch."
+          exit 1
+
+  Test-Docusaurus-Deployment:
+    name: Test Deployment to https://docs.switchmap-ng.io
+    runs-on: ubuntu-latest
+    needs: [Code-Quality-Checks]
+    # Run only if the develop branch and not dependabot    
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.base.ref == 'develop' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test building the website
+        run: yarn build
+
+  Check-Target-Branch:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    name: Check Target Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the target branch is develop
+        if: github.event.pull_request.base.ref != 'develop'
+        run: |
+          echo "Error: Pull request target branch must be 'develop'. Please refer PR_GUIDELINES.md"
+          exit 1
