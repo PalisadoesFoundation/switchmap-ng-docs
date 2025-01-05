@@ -432,6 +432,7 @@ a:hover {
  max-height: 60vh;
  margin: auto;
  padding: 0;
+ opacity: 0;
 }
 
 .Hero, .heroBanner_qdFl{
