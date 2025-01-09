@@ -13,6 +13,7 @@
   padding-bottom: 0 !important;
 }
 
-.button{
-  margin: 1rem;
+.hero-image-section{
+  display: flex;
+  align-items: center;
 }

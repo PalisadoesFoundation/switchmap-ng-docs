@@ -1,8 +1,9 @@
-import './HeroImage.css';
+import './HeroSection.css';
+import React from 'react';
 
-export default function HeroImage() {
+export default function HeroSection() {
   return (
-    <section>
+    <section className="hero-image-section">
       <img
         className="header-image"
         src="/img/image-02.png"

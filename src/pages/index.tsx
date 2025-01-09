@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HeroImage from '@site/src/components/HeroImage/HeroImage';
+import HeroSection from '@site/src/components/HeroImage/HeroSection';
 
 import styles from './index.module.css';
 
@@ -12,7 +12,24 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <div className="buttons_AeoN">
+        <a
+          className="button button--primary button--lg"
+          href="/docs/introduction"
+          aria-label="Get started"
+        >
+          Get Started
+        </a>
+        <a
+          className="button button--secondary button--lg"
+          href="/docs/community"
+          aria-label="Join the community"
+        >
+          Community
+        </a>
       </div>
+      </div>
+      
     </header>
   );
 }
@@ -26,7 +43,7 @@ export default function Home() {
     >
       <HomepageHeader />
       <main>
-        <HeroImage />
+        <HeroSection />
       </main>
     </Layout>
   );
