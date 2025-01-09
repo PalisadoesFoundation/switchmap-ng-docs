@@ -423,22 +423,3 @@ a:hover {
 .iconExternalLink_nPIU {
   display: none !important;
 }
-
-.heroBanner_qdFl{
-  background-color: transparent;
-}
-
-.header-image{
- max-height: 60vh;
- margin: auto;
- padding: 0;
- opacity: 0;
-}
-
-.Hero, .heroBanner_qdFl{
-  padding-bottom: 0 !important;
-}
-
-.button{
-  margin: 1rem;
-}
