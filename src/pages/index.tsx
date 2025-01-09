@@ -14,14 +14,14 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
       <div className="buttons_AeoN">
         <a
-          className="button button--primary button--lg"
+          className={`${styles.button} button button--primary button--lg`}
           href="/docs/introduction"
           aria-label="Get started"
         >
           Get Started
         </a>
         <a
-          className="button button--secondary button--lg"
+          className={`${styles.button} button button--secondary button--lg`}
           href="/docs/community"
           aria-label="Join the community"
         >
