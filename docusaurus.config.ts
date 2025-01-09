@@ -99,12 +99,6 @@ const config: Config = {
           href: "https://docs-api.switchmap-ng.io/",
           target: "_self",
         },
-
-        {
-          label: "Demo",
-          position: "left",
-          href: "http://admin-demo.talawa.io/",
-        },
         {
           to: "https://github.com/PalisadoesFoundation",
           position: "right",
