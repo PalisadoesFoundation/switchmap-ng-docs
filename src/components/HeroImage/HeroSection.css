@@ -21,7 +21,13 @@
 }
 
 .hero-image {
-  width: 40%;
-  max-width: 500px;
-  height: auto;
+  height: 100%;
+
+}
+
+@media (min-width: 480px) {
+  .hero-image-section {
+    min-height: 600px;
+    max-height: 950px;
+  }
 }

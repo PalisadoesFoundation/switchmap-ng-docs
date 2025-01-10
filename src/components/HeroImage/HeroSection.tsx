@@ -22,7 +22,7 @@ export default function HeroSection() {
           speed: '1',
           loop: true,
           autoplay: true,
-          style: { width: '100%', height: 'auto' },
+          style: { height: '100%' },
         })}
       </div>
     </section>
