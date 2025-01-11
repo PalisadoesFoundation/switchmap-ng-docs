@@ -13,7 +13,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="hero-image-section">
+    <section className="hero-image-section section-container">
       <div className="hero-image">
       {/* React.createElement is used to suppress TypeScript errors as VS code throws an error for lottie-player othe  */}
         {React.createElement('lottie-player', {
