@@ -4,11 +4,13 @@ import Layout from '@theme/Layout';
 import HeroSection from '@site/src/components/HeroImage/HeroSection';
 
 import styles from './index.module.css';
+import NetworkLayers from '../components/NetworkLayers/NetworkLayers';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <div className='section-container'>
+    <header className={clsx('hero hero--primary', styles.heroBanner,)}>
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -31,6 +33,7 @@ function HomepageHeader() {
       </div>
       
     </header>
+    </div>
   );
 }
 
@@ -44,6 +47,7 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HeroSection />
+        <NetworkLayers />
       </main>
     </Layout>
   );

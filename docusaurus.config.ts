@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: "Switchmap-NG Documentation",
-  tagline: "Start your open source journey here",
+  title: "Know Your Topology",
+  tagline: "Network port status reporting. No need to login to every device. Just use Switchmap-NG.",
   favicon: 'img/icons/favicon_palisadoes.ico',
 
   url: "https://docs.switchmap-ng.io/",

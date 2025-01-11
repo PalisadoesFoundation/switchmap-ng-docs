@@ -5,7 +5,7 @@
  * You can override the default Infima variables here. 
  */
 
- :root {
+:root {
   --secondary-blue-900: #001c63;
   --sidebar-bg-color: #f3f4f6;
   --secondary-blue-500: #3970fd;
@@ -421,4 +421,17 @@ a:hover {
 /* Hide external link svg on Navbar */
 .iconExternalLink_nPIU {
   display: none !important;
+}
+
+.section-container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.hero__subtitle{
+  line-height: 1.4;
 }
