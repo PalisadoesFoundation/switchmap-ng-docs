@@ -1,6 +1,8 @@
 ---
 id: introduction
 title: Introduction
+slug: /
+sidebar_position: 1
 ---
 
 # Introduction
@@ -10,10 +12,10 @@ the status of network connected devices. The information reported
 includes:
 
 1.  Open Systems Interconnection model (OSI model) data such as:
-2.  Layer 1 information (Network port names, speed, state, neighbors)
-3.  Layer 2 information (VLANs, 802.1q trunk links)
-4.  Layer 3 information (ARP information)
-5.  System status
+    1.  Layer 1 information (Network port names, speed, state, neighbors)
+    1.  Layer 2 information (VLANs, 802.1q trunk links)
+    1.  Layer 3 information (ARP information)
+1.  System status
 
 ## Download
 

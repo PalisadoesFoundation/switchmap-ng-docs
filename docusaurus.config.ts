@@ -60,28 +60,27 @@ const config: Config = {
       },
       items: [
         {
-          label: "General",
-          position: "left",
-          to: "/",
-          target: "_self",
+          sidebarId: 'tutorialSidebar',
+          position: 'left',
+          label: 'General',
+          href: "/docs",
         },
-        
         {
           label: "Web Guide",
           position: "left",
-          href: "https://docs-web.switchmap-ng.io/",
+          href: "https://docs-web.switchmap-ng.io/docs",
           target: "_self",
         },
         {
           label: "Poller Guide",
           position: "left",
-          href: "https://docs-poller.switchmap-ng.io/",
+          href: "https://docs-poller.switchmap-ng.io/docs",
           target: "_self",
         },
         {
           label: "API Guide",
           position: "left",
-          href: "https://docs-api.switchmap-ng.io/",
+          href: "https://docs-api.switchmap-ng.io/docs",
           target: "_self",
         },
         {
