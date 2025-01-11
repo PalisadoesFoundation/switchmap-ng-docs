@@ -430,3 +430,8 @@ a:hover {
   width: 100%;
   box-sizing: border-box;
 }
+
+
+.hero__subtitle{
+  line-height: 1.4;
+}

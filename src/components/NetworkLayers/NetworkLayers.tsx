@@ -5,15 +5,15 @@ const NetworkLayers = () => {
   const layers = [
     {
       title: "Layer 1",
-      details: ["Network port names", "Speed", "State", "Neighbors"],
+      details: "Identify important troubleshooting and cybersecurity related information such as interface names, speed, state, and neighboring devices",
     },
     {
       title: "Layer 2",
-      details: ["VLANs", "802.1q trunk links"],
+      details: "Visualize your VLANs and the 802.1q trunk links that are configured to support them. View the true scale of your topology and the networks it supports",
     },
     {
       title: "Layer 3",
-      details: ["Hostname", "IPs", "ARP"],
+      details: "Get historical data for hostnames, IPs, and MAC address across your network. Invaluable information for tracking your topology changes.",
     },
   ];
 
@@ -23,11 +23,7 @@ const NetworkLayers = () => {
       {layers.map((layer, index) => (
         <div className="card" key={index}>
           <h3>{layer.title}</h3>
-          <ul>
-            {layer.details.map((detail, i) => (
-              <li key={i}>{detail}</li>
-            ))}
-          </ul>
+          <p>{layer.details}</p>
         </div>
       ))}
     </div>

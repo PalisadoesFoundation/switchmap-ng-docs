@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: "Know Your Topology",
-  tagline: "Network Port Status Reporting",
+  tagline: "Network port status reporting. No need to login to every device. Just use Switchmap-NG.",
   favicon: 'img/icons/favicon_palisadoes.ico',
 
   url: "https://docs.switchmap-ng.io/",
