@@ -9,7 +9,7 @@ jobs:
   Deploy-Docusaurus:
     name: Deploy https://docs.switchmap-ng.io website
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.base.ref == 'develop' }}
     environment:
       # This "name" has to be the repos' branch that contains 
       # the current active website. There must be an entry for
