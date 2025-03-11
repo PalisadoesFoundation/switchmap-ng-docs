@@ -176,6 +176,12 @@ the screen.
     ```
     var/log/
     ```
+1. You can watch the logging output live by running these commands:
+    ```
+    $ tail -f var/log/switchmap-dashboard.log
+    $ tail -f var/log/switchmap.log
+    $ tail -f var/log/switchmap-server.log
+    ```
 Now it's time to test the Ingester. 
 
 ### Testing the Ingester
@@ -190,6 +196,12 @@ Ingesting data is a key feature of the application. It's the process that update
 1. If in doubt, check the log files in the directory below:
     ```
     var/log/
+    ```
+1. You can watch the logging output live by running these commands:
+    ```
+    $ tail -f var/log/switchmap-dashboard.log
+    $ tail -f var/log/switchmap.log
+    $ tail -f var/log/switchmap-server.log
     ```
 Now it's time to test the API. 
 
@@ -213,6 +225,13 @@ database.
     ```
     var/log/
     ```
+1. You can watch the logging output live by running these commands:
+    ```
+    $ tail -f var/log/switchmap-dashboard.log
+    $ tail -f var/log/switchmap.log
+    $ tail -f var/log/switchmap-server.log
+    ```
+
 Now it's time to test the web dashboard.
 
 ### Testing the Web Dashboard
@@ -235,7 +254,16 @@ You can test whether the web dashboard is working by:
     ```
         http://localhost:7001/switchmap/
     ```
-
+1. If in doubt, check the log files in the directory below:
+    ```
+    var/log/
+    ```
+1. You can watch the logging output live by running these commands:
+    ```
+    $ tail -f var/log/switchmap-dashboard.log
+    $ tail -f var/log/switchmap.log
+    $ tail -f var/log/switchmap-server.log
+    ```
 The Webserver help page provides the necessary steps to view switchmap on port 80 using Apache or Nginx
 
 ## Testing Setup for Developers
@@ -269,15 +297,17 @@ directory in `$HOME`
 
 ### Run the Test Suite
 
-You can run all the tests with this command.
-```
-(venv) $ tests/bin/_do_all_tests.py
-```
-An alternative method is to use pytest.
-```
-(venv) $ pytest tests/switchmap_
-```
-You can run individual tests with this command.
-```
-(venv) $ tests/switchmap_/path/to/test.py
-```
+There are multiple ways to run the test suites.
+
+1. You can run all the tests with this command.
+    ```
+    (venv) $ tests/bin/_do_all_tests.py
+    ```
+1. An alternative method is to use pytest.
+    ```
+    (venv) $ pytest tests/switchmap_
+    ```
+1. You can run individual tests with this command.
+    ```
+    (venv) $ tests/switchmap_/path/to/test.py
+    ```
