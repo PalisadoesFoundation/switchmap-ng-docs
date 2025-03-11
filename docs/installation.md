@@ -152,68 +152,91 @@ details if these methods fail.
 
 ### Testing Polling
 
-You can test your SNMP configuration and connectivity to your devices
+Polling is a key feature of the application.
+
+1. You can test your SNMP configuration and connectivity to your devices
 using the `switchmap_poller_test.py` utility like this:
-
-```bash
-(venv) $ bin/tools/switchmap_poller_test.py --hostname HOSTNAME
-```
-
-If you have setup switchmap-ng as a system daemon with a
+    ```bash
+    (venv) $ bin/tools/switchmap_poller_test.py --hostname HOSTNAME
+    ```
+1. If you have setup switchmap-ng as a system daemon with a
 `daemon_directory:` value `/var/run` you will need to specify the `venv`
 path to `python3` first.
-
-```bash
-(venv) $ sudo venv/bin/python3 bin/tools/switchmap_poller_test.py --hostname HOSTNAME
-```
-
-If successful it will print the entire contents of the polled data on
+    ```bash
+    (venv) $ sudo venv/bin/python3 bin/tools/switchmap_poller_test.py --hostname HOSTNAME
+    ```
+1. If successful it will print the entire contents of the polled data on
 the screen.
+1. You can get the poller running using these commands.
+    ```bash
+    (venv) $ bin/systemd/switchmap_poller --start
+    (venv) $ bin/systemd/switchmap_poller --status
+    ```
+1. If in doubt, check the log files in the directory below:
+    ```
+    var/log/
+    ```
+Now it's time to test the Ingester. 
+
+### Testing the Ingester
+
+Ingesting data is a key feature of the application. It's the process that updates the database with the latest information from the poller.
+
+1. You can get the ingester running using these commands.
+    ```bash
+    (venv) $ bin/systemd/switchmap_ingester --start
+    (venv) $ bin/systemd/switchmap_ingester --status
+    ```
+1. If in doubt, check the log files in the directory below:
+    ```
+    var/log/
+    ```
+Now it's time to test the API. 
 
 ### Testing the API Server
 
-You can test whether the API is working by starting it on the device
+The API is a key feature of the application.
+
+1. You can test whether the API is working by starting it on the device
 designated to receiving polling information and storing it in the
 database.
-
-```bash
-(venv) $ bin/systemd/switchmap_server --start
-(venv) $ bin/systemd/switchmap_server --status
-```
-
-The result of the status check should look like this:
-
-```
-Daemon is running - <bound method Agent.name of <switchmap.core.agent.AgentAPI object at>>
-Daemon is running - <bound method Agent.name of <switchmap.core.agent.Agent object at>>
-```
+    ```bash
+    (venv) $ bin/systemd/switchmap_server --start
+    (venv) $ bin/systemd/switchmap_server --status
+    ```
+1. The result of the status check should look like this:
+    ```
+    Daemon is running - <bound method Agent.name of <switchmap.core.agent.AgentAPI object at>>
+    Daemon is running - <bound method Agent.name of <switchmap.core.agent.Agent object at>>
+    ```
+1. If in doubt, check the log files in the directory below:
+    ```
+    var/log/
+    ```
+Now it's time to test the web dashboard.
 
 ### Testing the Web Dashboard
 
-You can test whether the web dashboard API is working by
+You can test whether the web dashboard is working by:
 
-1)  Correctly configuring and starting the API server as shown above
-2)  Starting the web dashboard as shown below.
+1.  Correctly configuring and starting the API server as shown above
+1.  Correctly configuring and starting the API server as shown above
+1.  Starting the web dashboard as shown below.
+    ```bash
+    (venv) $ bin/systemd/switchmap_dashboard --start
+    (venv) $ bin/systemd/switchmap_dashboard --status
+    ```
+1. The result of the status check should look like this:
+    ```
+    Daemon is running - <bound method Agent.name of <switchmap.core.agent.AgentAPI object at>>
+    Daemon is running - <bound method Agent.name of <switchmap.core.agent.Agent object at>>
+    ```
+1. You can then visit the dashboard URL. (You will need to make adjustments if you installed the application on a remote server):
+    ```
+        http://localhost:7001/switchmap/
+    ```
 
-```bash
-(venv) $ bin/systemd/switchmap_dashboard --start
-(venv) $ bin/systemd/switchmap_dashboard --status
-```
-
-The result of the status check should look like this:
-
-```
-Daemon is running - <bound method Agent.name of <switchmap.core.agent.AgentAPI object at>>
-Daemon is running - <bound method Agent.name of <switchmap.core.agent.Agent object at>>
-```
-
-You can then visit the dashboard URL. (You will need to make adjustments
-if you installed the application on a remote server):
-
-    http://localhost:7001/switchmap/
-
-The Webserver help page provides the necessary steps to view switchmap
-on port 80 using Apache or Nginx
+The Webserver help page provides the necessary steps to view switchmap on port 80 using Apache or Nginx
 
 ## Testing Setup for Developers
 

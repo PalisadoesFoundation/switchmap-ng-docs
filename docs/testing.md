@@ -101,6 +101,17 @@ directory in `$HOME`
 ```bash
 (venv) $ tests/bin/test_db_config_setup.py
 ```
+## Accessing the Web UI Dashboard
+
+The steps for this are simple:
+
+1. Ensure that the poller, ingester, server and dashboard services are all running.
+1. Visit the Web UI's Dashboard URL. The URL to access will be:
+    ```
+    http://localhost:7001/switchmap/
+    ```
+You can now access the various device screens.
+
 ## API Interactive GraphQL Interaction
 
 This is useful for:
@@ -118,9 +129,14 @@ use interactive web page.
 
 ### Interactive GraphQL URL
 
-The URL on a running on your local server is:
+The steps for this are simple:
 
-http://localhost:7000/switchmap/api/igraphql
+1. Ensure that the poller, ingester, server and dashboard services are all running
+1. Visit the API's GraphQL URL. The URL to access will be:
+    ```
+    http://localhost:7000/switchmap/api/igraphql
+    ```
+You can now do your queries.
 
 ### Interactive GraphQL Screenshot
 
