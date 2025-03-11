@@ -25,8 +25,55 @@ Here are some links to get you started:
         1. Tutorial: [SNMP Walk Examples for Windows](https://www.itprc.com/snmpwalk-examples-for-windows/)
 1. Ubuntu: 
     1. This page includes both server and client setup.
-    1. [Ubuntu SNMP Setup Guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-snmp-daemon-and-client-on-ubuntu-18-04#step-3-configuring-the-snmp-agent-server)
+        1. [Ubuntu SNMP Setup Guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-snmp-daemon-and-client-on-ubuntu-18-04#step-3-configuring-the-snmp-agent-server)
+    1. Testing configuration example for the `/etc/snmp/snmpd.conf` file.
+        1. Add this sample SNMPv2 configuration in the `/etc/snmp/snmpd.conf` file adding the community string `switchmap` with the ability to scan the entire SNMP tree.
+            ```
+            view switchmap-view  included   .1
+            rocommunity  switchmap default -V switchmap-view
+            rocommunity6 switchmap default -V switchmap-view
+            ```
+        1. Restart the `snmpd` daemon.
+            ```bash
+            $ systemctl restart snmpd
+            ```
+        1. Test by running this command.
+            ```bash
+            $ snmpwalk -v2c -c switchmap localhost .1.3.6.1.2.1.2
+            ```
+        1. You can get more useful information by commenting out the `mibs:` line in the `/etc/snmp/snmp.conf` file. The output of the previous command will be more complete.
+            ```
+            # Contents of file etc/snmp/snmp.conf
+            #mibs :
+            ```
+        1. Run the command again.
+            ```bash
+            $ snmpwalk -v2c -c switchmap localhost .1.3.6.1.2.1.2
+            ```
+        1. Add these configuration parameters to the `etc/config.yaml` file
+            ```yaml
+                zones:
+                    - zone: TEST
+                    hostnames:
+                        - localhost
 
+                snmp_groups:
+
+                    - group_name: Localhost-Test
+                        snmp_version: 2
+                        snmp_secname:
+                        snmp_community: switchmap
+                        snmp_port: 161
+                        snmp_authprotocol:
+                        snmp_authpassword:
+                        snmp_privprotocol:
+                        snmp_privpassword:
+                        enabled: True
+            ```
+        1. This testing command for the new `localhost` entry will show results.
+            ```bash
+            sudo venv/bin/python3 bin/tools/switchmap_poller_test.py --hostname localhost
+            ```
 ## SwitchMap-NG Setup for Developers
 
 Follow the installation steps above to have the application ready, then
@@ -54,6 +101,17 @@ directory in `$HOME`
 ```bash
 (venv) $ tests/bin/test_db_config_setup.py
 ```
+## Accessing the Web UI Dashboard
+
+The steps for this are simple:
+
+1. Ensure that the poller, ingester, server and dashboard services are all running.
+1. Visit the Web UI's Dashboard URL. The URL to access will be:
+    ```
+    http://localhost:7001/switchmap/
+    ```
+You can now access the various device screens.
+
 ## API Interactive GraphQL Interaction
 
 This is useful for:
@@ -71,9 +129,14 @@ use interactive web page.
 
 ### Interactive GraphQL URL
 
-The URL on a running on your local server is:
+The steps for this are simple:
 
-http://localhost:7000/switchmap/api/igraphql
+1. Ensure that the poller, ingester, server and dashboard services are all running
+1. Visit the API's GraphQL URL. The URL to access will be:
+    ```
+    http://localhost:7000/switchmap/api/igraphql
+    ```
+You can now do your queries.
 
 ### Interactive GraphQL Screenshot
 
@@ -116,17 +179,13 @@ You can run all the tests with this command.
 
 ```bash
 (venv) $ cd /path/to/switchmap
-(venv) $ tests/bin/_do_all_tests.py
-```
-An alternative method is to use pytest.
-```bash
-(venv) $ cd /path/to/switchmap
 (venv) $ pytest tests/switchmap_
+```
 ```
 You can run individual tests with this command.
 ```bash
 (venv) $ cd /path/to/switchmap
-(venv) $ tests/switchmap_/path/to/test.py
+(venv) $ pytest tests/switchmap_/path/to/test.py
 ```
 ### Populating the Database Using the Ingester
 
@@ -143,3 +202,12 @@ An easy way to populate the database using this data is to:
     `cache_directory`
 3)  Start or restart the poller daemon or app
 4)  The updated data should now be visible in the web UI
+
+## Running Tests with Coverage Report
+
+To run the test suite and generate a coverage report, use this command:
+
+```bash
+(venv) $ cd /path/to/switchmap
+(venv) $ pytest --cov=switchmap --cov-report=lcov:coverage/coverage.lcov --cov-report=term-missing tests/switchmap_
+```
