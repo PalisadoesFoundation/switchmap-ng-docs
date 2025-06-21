@@ -7,7 +7,7 @@ on:
 
 jobs:
   Deploy-Docusaurus:
-    name: Deploy https://docs-archived.switchmap-ng.io website
+    name: Deploy https://docs-legacy.switchmap-ng.io website
     runs-on: ubuntu-latest
     # Run only if not dependabot
     if: ${{ github.actor != 'dependabot[bot]' }}
