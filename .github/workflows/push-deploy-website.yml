@@ -7,7 +7,7 @@ on:
 
 jobs:
   Deploy-Docusaurus:
-    name: Deploy https://docs.switchmap-ng.io website
+    name: Deploy https://docs-archived.switchmap-ng.io website
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     environment:
